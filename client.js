@@ -7,11 +7,19 @@ const connect = function() {
   const conn = net.createConnection({ 
     host: '135.23.222.131',
     port: 50542
-  });
+  },
+  () => {
+      console.log('Successfully connected to game server');
+    });
   // interpret incoming data as text
   conn.on('data', (input) => {
     console.log(input);
+  });
+
+conn.on('connect', () => {
+  conn.write("Name: IBR")
 })
+
   conn.setEncoding('utf8'); 
 
   return conn;
