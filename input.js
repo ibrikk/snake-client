@@ -1,4 +1,12 @@
+const { upkey, leftkey, downkey, rightkey } = require('./moves');
+
 let connection;
+
+const message = 'Say: ';
+const hello = 'Hello there!';
+const stay = 'Stay a while...';
+const listen = '...and listen!';
+
 
 const setupInput = function(conn) {
   connection = conn;
@@ -7,7 +15,7 @@ const setupInput = function(conn) {
   stdin.setEncoding('utf8');
   stdin.resume();
   stdin.on('data', key => {
-    handleUseInput(key);
+    handleUserInput(key);
   });
   return stdin;
 }
@@ -22,14 +30,19 @@ const handleUserInput = (key) => {
       connection.write(key);
     }, 100);
   };
-  if (key === 'u0003') {
+  if (key === '\u0003') {
     stdout.write('Exited the snek game. Byeee!\n');
     process.exit();
+  }
+    if (key === 'w') {
+      clearInterval(func);
+      interval(upkey);
   }
   if (key === 'a') {
     clearInterval(func);
     interval(leftkey);
     }
+  
     if (key === 's') {
       clearInterval(func);
       interval(downkey);
@@ -37,6 +50,15 @@ const handleUserInput = (key) => {
     if (key === 'd') {
       clearInterval(func);
       interval(rightkey);
+  }
+  if (key === "h") {
+    connection.write(message + hello);
+  }
+  if (key === "j") {
+    connection.write(message + stay);
+  }
+  if (key === 'k') {
+    connection.write(message + listen);
   }
 
 };
