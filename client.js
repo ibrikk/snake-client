@@ -16,9 +16,13 @@ const connect = function() {
     console.log(input);
   });
 
-conn.on('connect', () => {
+conn.on('connect',  () => {
   conn.write("Name: IBR")
-})
+});
+
+conn.on('Move up: ', (data) => {
+  conn.write(data) // up:  x: 0, y: -1 
+});
 
   conn.setEncoding('utf8'); 
 
