@@ -1,10 +1,12 @@
 const { connect } = require('./client');
-const { handleUserInput } = require('./input');
+const { setupInput } = require('./input');
 console.log('Connecting ...');
-connect();
+const connection = connect();
 
-setupInput();
 
+setupInput(connection);
+
+module.exports = {connect};
 /**
  * Setup User Interface 
  * Specifically, so that we can handle user input via stdin
